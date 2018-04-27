@@ -1,0 +1,521 @@
+options{
+STATIC = false;
+DEBUG_LOOKAHEAD = false;
+}
+PARSER_BEGIN(compilador_tokens)
+package compilador;
+import java.io.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
+public class compilador_tokens{
+
+public void run() throws Exception{
+Token t = new Token ();
+do {
+
+t = getNextToken(); 
+String nomeToken = tokenImage[t.kind]; //guarda o nome do token na string
+
+} while(t.kind!=0); //condicao de parada: final do arquivo (constante eof 0 )
+}
+
+public static void main(String args[], String x) throws ParseException, FileNotFoundException {
+
+try {
+
+}catch (Error e){
+System.out.println(e.getMessage()); //Mensagem de erro
+}
+
+}
+}
+PARSER_END(compilador_tokens)
+
+TOKEN_MGR_DECLS: {
+    int countLexError = 0;
+    String mensagem = "";
+		
+    public int foundLexError() {
+	return countLexError;
+    }
+
+    public String getMessage() {
+        return mensagem;
+    }
+}
+
+SKIP : // TOKENS IGNORADOS
+{
+ " "
+| "\r" 
+| "\t" 
+| "\n"
+}
+TOKEN [IGNORE_CASE]: //PALAVRAS RESERVADAS
+{ 
+<DO: "do"> {
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<THIS: "this">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<BODY: "body">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<DESCRIPTION: "description">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<DECLARATION: "declaration">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<TYPE: "type">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<IS: "is">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<CONSTANT: "constant">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<AND: "and">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<VARIABLE: "variable">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<AS: "as">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<INTEGER: "integer">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<REAL: "real">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<STRING: "string">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<LOGIC: "logic">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<DESIGNATE: "designate">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<TO: "to">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<READ: "read">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<WRITE: "write">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<ALL: "all">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<REPEAT: "repeat">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<TRUE: "true">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+|<UNTRUE:"untrue">{
+    System.out.println("Palavra Reservada: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Palavra Reservada; ID: "+ matchedToken.kind+"\n";
+ }
+}
+
+TOKEN : //SIMBOLOS ESPECIAIS
+{ 
+<OPEN_BRACKET: "[">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<CLOSE_BRACKET: "]">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<POINT: ".">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<COMMA: ",">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<EQUAL: "=">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<PLUS: "+">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<MINUS: "-">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<ASTERISK: "*">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DIVISION: "/">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_ASTERISK: "**">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<PERCENT: "%">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_PERCENT: "%%">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_EQUALS: "==">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<EXCLAMATION_EQUAL: "!=">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_LESS_THAN: "<<" >{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_GREATER_THAN: ">>">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_LESS_THAN_EQUAL: "<<=">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<DOUBLE_GREATER_THAN_EQUAL: ">>=">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+
+|<AMPERSAND: "&">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ } 
+|<PIPE: "|">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<EXCLAMATION: "!">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<OPEN_PARENTHESIS: "(">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+|<CLOSE_PARENTHESIS: ")">{
+    System.out.println("Simbolo Especial: "+image);
+    mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+    "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+    +"; Caterogia: Simbolo Especial; ID: "+ matchedToken.kind+"\n";
+ }
+}
+
+
+TOKEN: //IDENTIFICADORES
+{
+    <IDENTIFICADORES: (<LETRA_MAIUSCULA>)(<UNDERLINE>)?((<LETRA>(<UNDERLINE>)?)|
+        (<DIGITO>(<DIGITO>)?(<LETRA>|<UNDERLINE>|(<LETRA>)<UNDERLINE>)))*>
+    {
+        System.out.println("Identificador: "+image);
+        mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"; Caterogia: Identificador; ID: "+matchedToken.kind+"\n";
+    }
+|
+    <ERRO_IDENTIFICADOR_INICIO_LETRA_MINUSCULA: (<LETRA>)(<UNDERLINE>)?((<LETRA>(<UNDERLINE>)?)|
+        (<DIGITO>(<DIGITO>)?(<LETRA>|<UNDERLINE>|(<LETRA>)<UNDERLINE>)))*>
+    {
+        countLexError++;
+        mensagem += "Identificador inválido (Primeira letra minúscula!): "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+    }
+|
+    <ERRO_IDENTIFICADOR_FINAL_NUMERICO: (<LETRA_MAIUSCULA>)(<UNDERLINE>)?((<LETRA>(<UNDERLINE>)?)|
+        (<DIGITO>(<DIGITO>)?(<LETRA>|<UNDERLINE>|(<LETRA>)<UNDERLINE>)))*<DIGITO>>
+    {
+        countLexError++;
+        mensagem += "Identificador inválido (Último dígito igual a número!): "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+    }
+|
+    <ERRO_IDENTIFICADOR_TRES_NUMEROS_CONSECUTIVO: (<LETRA_MAIUSCULA>)(<UNDERLINE>)?((<LETRA>(<UNDERLINE>)?)|
+        (<DIGITO>(<DIGITO>)*(<LETRA>|<UNDERLINE>|(<LETRA>)<UNDERLINE>)))*>
+    {
+        countLexError++;
+        mensagem += "Identificador inválido (Mais de dois números consecutivos!): "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+    }
+|
+    <ERRO_IDENTIFICADOR_UNDERLINE_CONSECUTIVO: (<LETRA_MAIUSCULA>)(<UNDERLINE>)*((<LETRA>(<UNDERLINE>)*)|
+        (<DIGITO>(<DIGITO>)?(<LETRA>|<UNDERLINE>|(<LETRA>)<UNDERLINE><UNDERLINE>)))*>
+    {
+        countLexError++;
+        mensagem += "Identificador inválido (Underlines consecutivos!): "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+    }
+|
+    <LETRA_MAIUSCULA: ["A"-"Z"]>
+|
+    <LETRA: ["a"-"z", "A"-"Z"]>
+|
+    <UNDERLINE: "_">
+}
+
+TOKEN : //NUMEROS
+{ 
+    <CONSTANTE_REAL: (<CONSTANTE_INTEIRA>) "." (<DIGITO>) (<DIGITO>)? (<DIGITO>)?>
+        {
+            System.out.println("Constante real: "+image);
+            mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+            "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+            +"; Caterogia: Constante Real; ID: "+matchedToken.kind+"\n";
+        }
+|
+    <ERRO_CONSTANTE_REAL: (<CONSTANTE_INTEIRA>) (<DIGITO>)+ "." (<DIGITO>)* |
+                          (<CONSTANTE_INTEIRA>) "."   
+                          (<DIGITO>) (<DIGITO>) (<DIGITO>) (<DIGITO>)+>
+        {
+			countLexError++;
+            System.out.println("Constante inteira: "+image);
+            mensagem += "Constante real inválida: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+            "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+            +"\n";
+        }
+
+
+|
+    <CONSTANTE_INTEIRA: (<DIGITO>) (<DIGITO>)? (<DIGITO>)? (<DIGITO>)?>
+        {
+            System.out.println("Constante inteira: "+image);
+            mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+            "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+            +"; Caterogia: Constante Inteira; ID: "+matchedToken.kind+"\n";
+        }
+
+|
+    <ERRO_CONSTANTE_INTEIRA: (<DIGITO>) (<DIGITO>) (<DIGITO>) 
+                                (<DIGITO>) (<DIGITO>)+> 
+
+        { 
+			countLexError++;
+            System.out.println("Constante inteira: "+image);
+            mensagem += "Constante inteira inválida: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+            "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+            +"\n";
+        
+        }
+|   <DIGITO: (["0"-"9"])>   
+}
+
+TOKEN:
+{
+    <SIMBOLOS_INVALIDOS : ~["[","]", ".",",","=","+","-","*", 
+    "/","%","=","<",">","&","|","!","(",")","a"-"z","A"-"Z","0"-"9"]> 
+    {
+	countLexError++;
+        mensagem += "Simbolo inválido: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+    }
+
+}
+
+TOKEN: //CONSTANTE LITERAL
+{ 
+    <CONSTANTE_LITERAL : (<ASPAS>) (<ASCII>)* (<ASPAS>) >
+        {
+            System.out.println("Constante literal: "+image);
+            mensagem += "Lexema: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+            "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+            +"; Caterogia: Constante Literal; ID: "+matchedToken.kind+"\n";
+        }
+		
+	| <ERRO_CONSTANTE_LITERAL: (<ASPAS>) (<ASCII>)* | (<ASPAS>) ((<ASCII>)|(<ASPAS>))+ (<ASPAS>)+> {
+                    countLexError++;
+		    mensagem += "Erro em constante literal: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+	}
+    
+    | <ASCII : ~["\""] > // Qualquer caracter que nao seja "
+    | <ASPAS : "\""> 
+
+	  
+}
+
+
+
+TOKEN: //COMENTARIOS
+{ 
+ <COMENTARIO_LINHA: "#" (<ASCII2>)*>
+    {
+        System.out.println("Comentario de linha");		
+    }   
+| 
+  <ASCII2 : ~["#","\n"]>
+
+| <COMENTARIO_BLOCO: (<COMENTARIO_SIMBOLO>) (<COMENTARIO_SIMBOLO>)
+                     (<ASCCI3>)*
+                     (<COMENTARIO_SIMBOLO>)(<COMENTARIO_SIMBOLO>)>
+    {
+        System.out.println("Comentario de bloco");		
+    }
+
+|
+    <ERRO_COMENTARIO_BLOCO: (<COMENTARIO_SIMBOLO>) (<COMENTARIO_SIMBOLO>)
+                            (<ASCCI3>)* (<COMENTARIO_SIMBOLO>)?> 
+    {
+        countLexError++;
+        mensagem += "Comentario de bloco não finalizado: "+image+ "; Linha: " +input_stream.getEndLine()+ 
+        "; Coluna: "+(input_stream.getEndColumn() - image.length()+1) 
+        +"\n";
+    }
+
+|<COMENTARIO_SIMBOLO : "#">
+
+| 
+  <ASCCI3 : ~["#"]>  
+}
+
+
+
+SPECIAL_TOKEN: 
+{
+ <INVALIDO_LEXICO:
+    (~[" ","\t","\n","\r","\f"])+> {
+	countLexError++;
+	System.out.println("Erro Lexico na linha "+input_stream.getEndLine()+ " e coluna "+(input_stream.getEndColumn() - image.length()+1)+": " +image);
+        mensagem += "Erro Lexico na linha "+input_stream.getEndLine()+ " e coluna "+(input_stream.getEndColumn() - image.length()+1)+": " +image +"\n";
+    }
+} 
